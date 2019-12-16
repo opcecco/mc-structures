@@ -11,31 +11,31 @@ public class Test
 	public static final int[] noise_p = new int[512];
 
 	public static long world_seed = -9026545427915476545L;
-	public static Random noise_rand = new Random(world_seed);
-	public static Random world_rand = new Random();
+	public static Random rand = new Random();
 
 
 	public static void initNoise()
 	{
+		rand.setSeed(world_seed);
 		// Waste some time
 		for (int i = 0; i < 66; ++i)
 		{
 			double dtrash;
 			int itrash;
 
-			dtrash = noise_rand.nextDouble();
-			dtrash = noise_rand.nextDouble();
-			dtrash = noise_rand.nextDouble();
+			dtrash = rand.nextDouble();
+			dtrash = rand.nextDouble();
+			dtrash = rand.nextDouble();
 
 			for (int l = 0; l < 256; ++l)
 			{
-				itrash = noise_rand.nextInt(256 - l) + l;
+				itrash = rand.nextInt(256 - l) + l;
 			}
 		}
 
-		double xo = noise_rand.nextDouble() * 256.0D;
-        double yo = noise_rand.nextDouble() * 256.0D;
-        double zo = noise_rand.nextDouble() * 256.0D;
+		double xo = rand.nextDouble() * 256.0D;
+        double yo = rand.nextDouble() * 256.0D;
+        double zo = rand.nextDouble() * 256.0D;
 
 		for (int i = 0; i < 256; noise_p[i] = i++)
         {
@@ -44,7 +44,7 @@ public class Test
 
         for (int l = 0; l < 256; ++l)
         {
-            int j = noise_rand.nextInt(256 - l) + l;
+            int j = rand.nextInt(256 - l) + l;
             int k = noise_p[l];
             noise_p[l] = noise_p[j];
             noise_p[j] = k;
@@ -62,8 +62,8 @@ public class Test
 	public static Random setRandomSeed(int p_72843_1_, int p_72843_2_, int p_72843_3_)
     {
         long i = (long)p_72843_1_ * 341873128712L + (long)p_72843_2_ * 132897987541L + getSeed() + (long)p_72843_3_;
-        world_rand.setSeed(i);
-        return world_rand;
+        rand.setSeed(i);
+        return rand;
     }
 
 
@@ -233,6 +233,38 @@ public class Test
 	}
 
 
+	private static int func_191070_b(int p_191070_0_, int p_191070_1_)
+    {
+        rand.setSeed((long)(p_191070_0_ + p_191070_1_ * 10387313));
+        int rotation = rand.nextInt(4);
+        ChunkPrimer chunkprimer = new ChunkPrimer();
+        setBlocksInChunk(p_191070_0_, p_191070_1_, chunkprimer);
+        int i = 5;
+        int j = 5;
+
+        if (rotation == 1)
+        {
+            i = -5;
+        }
+        else if (rotation == 2)
+        {
+            i = -5;
+            j = -5;
+        }
+        else if (rotation == 3)
+        {
+            j = -5;
+        }
+
+        int k = chunkprimer.findGroundBlockIdx(7, 7);
+        int l = chunkprimer.findGroundBlockIdx(7, 7 + j);
+        int i1 = chunkprimer.findGroundBlockIdx(7 + i, 7);
+        int j1 = chunkprimer.findGroundBlockIdx(7 + i, 7 + j);
+        int k1 = Math.min(Math.min(k, l), Math.min(i1, j1));
+        return k1;
+    }
+
+
 	public static boolean canSpawnStructureAtCoords(int chunkX, int chunkZ)
     {
         int i = chunkX;
@@ -258,9 +290,9 @@ public class Test
 
         if (i == k && j == l && isIslandChunk(i, j))
         {
-            // int i1 = func_191070_b(i, j, endProvider);
-            // return i1 >= 60;
-			return true;
+            int i1 = func_191070_b(i, j, endProvider);
+            return i1 >= 60;
+			// return true;
         }
         else
         {
