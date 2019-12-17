@@ -274,7 +274,7 @@ def can_spawn(chunk_x, chunk_z):
 	k = k + int((random.nextInt(9) + random.nextInt(9)) / 2)
 	l = l + int((random.nextInt(9) + random.nextInt(9)) / 2)
 
-	return i == k and j == l and is_island_chunk(i, j) and generation_block_height(i, j) >= 60
+	return i == k and j == l and is_island_chunk(i, j) #and generation_block_height(i, j) >= 60
 
 
 if __name__ == '__main__':
@@ -283,4 +283,4 @@ if __name__ == '__main__':
 	# print(json.dumps(coords))
 
 	coords = [(x, z) for x, z in product(range(-100, 100), range(-100, 100)) if can_spawn(x, z)]
-	print('\n'.join('({}, {})'.format(x, z) for x, z in coords))
+	pprint(coords)
