@@ -25,6 +25,7 @@ class NoiseGeneratorSimplex:
 			self.p[l + 256] = self.p[l]
 
 
+	@staticmethod
 	def dot(p0, p1, p3):
 
 		return p0[0] * p1 + p0[1] * p3
@@ -32,11 +33,11 @@ class NoiseGeneratorSimplex:
 
 	def getValue(self, p1, p3):
 
-		d3 = 0.5 * (NoiseGeneratorSimplex.SQRT_3 - 1)
+		d3 = 0.5 * (self.SQRT_3 - 1)
 		d4 = (p1 + p3) * d3
 		i = floor(p1 + d4)
 		j = floor(p3 + d4)
-		d5 = (3 - NoiseGeneratorSimplex.SQRT_3) / 6
+		d5 = (3 - self.SQRT_3) / 6
 		d6 = (i + j) * d5
 		d7 = i - d6
 		d8 = j - d6
@@ -65,7 +66,7 @@ class NoiseGeneratorSimplex:
 			d0 = 0
 		else:
 			d15 = d15 * d15
-			d0 = d15 * d15 * NoiseGeneratorSimplex.dot(NoiseGeneratorSimplex.grad3[k1], d9, d10)
+			d0 = d15 * d15 * self.dot(self.grad3[k1], d9, d10)
 
 		d16 = 0.5 - d11 * d11 - d12 * d12
 
@@ -73,7 +74,7 @@ class NoiseGeneratorSimplex:
 			d1 = 0
 		else:
 			d16 = d16 * d16
-			d1 = d16 * d16 * NoiseGeneratorSimplex.dot(NoiseGeneratorSimplex.grad3[l1], d11, d12)
+			d1 = d16 * d16 * self.dot(self.grad3[l1], d11, d12)
 
 		d17 = 0.5 - d13 * d13 - d14 * d14
 
@@ -81,6 +82,6 @@ class NoiseGeneratorSimplex:
 			d2 = 0
 		else:
 			d17 = d17 * d17
-			d2 = d17 * d17 * NoiseGeneratorSimplex.dot(NoiseGeneratorSimplex.grad3[i2], d13, d14)
+			d2 = d17 * d17 * self.dot(self.grad3[i2], d13, d14)
 
 		return 70 * (d0 + d1 + d2)

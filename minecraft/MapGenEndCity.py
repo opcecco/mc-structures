@@ -38,7 +38,8 @@ class MapGenEndCity:
 			return False
 
 
-	def funcb(self, p0, p1, p2):
+	@staticmethod
+	def funcb(p0, p1, p2):
 
 		random = Random(p0 + p1 * 10387313)
 		rotation = Rotation(random.nextInt(len(Rotation)))

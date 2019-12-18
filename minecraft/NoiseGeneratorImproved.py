@@ -31,7 +31,7 @@ class NoiseGeneratorImproved:
 	def grad(self, p1, p2, p4, p6):
 
 		i = p1 & 15
-		return NoiseGeneratorImproved.GRAD_X[i] * p2 + NoiseGeneratorImproved.GRAD_Y[i] * p4 + NoiseGeneratorImproved.GRAD_Z[i] * p6
+		return self.GRAD_X[i] * p2 + self.GRAD_Y[i] * p4 + self.GRAD_Z[i] * p6
 
 
 	def populateNoiseArray(self, noiseArray, xOffset, yOffset, zOffset, xSize, ySize, zSize, xScale, yScale, zScale, noiseScale):

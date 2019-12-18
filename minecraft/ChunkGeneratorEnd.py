@@ -61,10 +61,10 @@ class ChunkGeneratorEnd:
 							d16 = (d11 - d10) * 0.125
 
 							for j2 in range(8):
-								iblockstate = ChunkGeneratorEnd.AIR
+								iblockstate = self.AIR
 
 								if d15 > 0:
-									iblockstate = ChunkGeneratorEnd.END_STONE
+									iblockstate = self.END_STONE
 
 								k2 = i2 + i1 * 8
 								l2 = l1 + k1 * 4
