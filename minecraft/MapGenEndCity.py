@@ -1,3 +1,9 @@
+from javarandom import Random
+
+from .Rotation import Rotation
+from .ChunkPrimer import ChunkPrimer
+
+
 class MapGenEndCity:
 
 	def __init__(self, p1):
@@ -34,5 +40,24 @@ class MapGenEndCity:
 
 	def funcb(self, p0, p1, p2):
 
-		# TODO: Complete this function
-		return 60
+		random = Random(p0 + p1 * 10387313)
+		rotation = Rotation(random.nextInt(len(Rotation)))
+		chunkprimer = ChunkPrimer()
+		p2.setBlocksInChunk(p0, p1, chunkprimer)
+		i = 5
+		j = 5
+
+		if rotation == Rotation.CLOCKWISE_90:
+			i = -5
+		elif rotation == Rotation.CLOCKWISE_180:
+			i = -5
+			j = -5
+		elif rotation == Rotation.COUNTERCLOCKWISE_90:
+			j = -5
+
+		k = chunkprimer.findGroundBlockIdx(7, 7)
+		l = chunkprimer.findGroundBlockIdx(7, 7 + j)
+		i1 = chunkprimer.findGroundBlockIdx(7 + i, 7)
+		j1 = chunkprimer.findGroundBlockIdx(7 + i, 7 + j)
+		k1 = min(min(k, l), min(i1, j1))
+		return k1

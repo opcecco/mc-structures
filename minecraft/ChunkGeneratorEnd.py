@@ -19,6 +19,11 @@ class ChunkGeneratorEnd:
 		self.islandNoise = NoiseGeneratorSimplex(self.rand)
 
 
+	def setBlocksInChunk(self, x, z, primer):
+
+		return
+
+
 	def getIslandHeightValue(self, p1, p2, p3, p4):
 
 		f = p1 * 2 + p3

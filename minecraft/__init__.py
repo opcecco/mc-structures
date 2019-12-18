@@ -1,4 +1,5 @@
 from .ChunkGeneratorEnd import *
+from .ChunkPrimer import *
 from .MapGenEndCity import *
 from .NoiseGeneratorImproved import *
 from .NoiseGeneratorOctaves import *
